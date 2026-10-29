@@ -1,0 +1,71 @@
+name: CI
+
+# noyau : Linux, ~1 min, à chaque poussée. Gratuit ou presque.
+# app   : macOS, ~10 min, sur pull request vers main seulement (facturé 10×).
+#         Sauté tant que App/CaptureICU.xcodeproj n'existe pas.
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  noyau:
+    name: Noyau (Linux)
+    runs-on: ubuntu-latest
+    container: swift:latest
+    outputs:
+      projet-xcode: ${{ steps.detection.outputs.existe }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Frontière du noyau + tous les tests : la même commande qu'en local.
+      - name: Vérifications (scripts/verifier.sh)
+        run: bash scripts/verifier.sh
+
+      - name: Matrice de traçabilité
+        if: always()
+        run: bash scripts/tracabilite.sh >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Le projet Xcode existe-t-il ?
+        id: detection
+        run: |
+          if [ -d App/CaptureICU.xcodeproj ]; then echo "existe=true" >> "$GITHUB_OUTPUT"
+          else echo "existe=false" >> "$GITHUB_OUTPUT"; fi
+
+  app:
+    name: App (simulateur iOS)
+    needs: noyau
+    if: needs.noyau.outputs.projet-xcode == 'true' && github.event_name != 'push'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Choisir un simulateur disponible
+        id: simulateur
+        run: |
+          udid=$(xcrun simctl list devices available | grep -m1 -oE '\(([0-9A-F-]{36})\)' | tr -d '()')
+          [ -n "$udid" ] || { echo "Aucun simulateur disponible." >&2; exit 1; }
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+
+      - name: Tests
+        working-directory: App
+        run: |
+          xcodebuild test \
+            -project CaptureICU.xcodeproj \
+            -scheme CaptureICU \
+            -destination "id=${{ steps.simulateur.outputs.udid }}" \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Conserver le rapport
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestResults.xcresult
+          path: App/TestResults.xcresult

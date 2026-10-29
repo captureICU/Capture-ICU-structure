@@ -1,0 +1,15 @@
+{
+  "captureCode" : "EXEMPLE-01",
+  "capturedAt" : "2026-10-28T14:30:00Z",
+  "schemaVersion" : 1,
+  "source" : "monitorPhoto",
+  "vitals" : {
+    "diastolicBP" : { "requiresReview" : true, "unit" : "mmHg", "wasEditedByClinician" : false },
+    "heartRate" : { "confidence" : 0.92, "requiresReview" : true, "unit" : "bpm", "value" : 90, "wasEditedByClinician" : false },
+    "meanArterialPressure" : { "requiresReview" : true, "unit" : "mmHg", "wasEditedByClinician" : false },
+    "oxygenSaturation" : { "confidence" : 0.88, "requiresReview" : true, "unit" : "%", "value" : 96, "wasEditedByClinician" : false },
+    "respiratoryRate" : { "requiresReview" : true, "unit" : "/min", "wasEditedByClinician" : false },
+    "systolicBP" : { "requiresReview" : true, "unit" : "mmHg", "wasEditedByClinician" : false },
+    "temperatureCelsius" : { "confidence" : 0.8, "requiresReview" : true, "unit" : "°C", "value" : 37.1, "wasEditedByClinician" : false }
+  }
+}

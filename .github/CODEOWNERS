@@ -1,0 +1,17 @@
+# Qui doit approuver une PR qui touche ces fichiers.
+# Prend effet quand la protection de main exige « Review from Code Owners ».
+# Remplacer les noms d'utilisateur GitHub quand le dépôt sera dans l'organisation d'équipe.
+
+# Contrats partagés : les modifier touche tout le monde (docs/SOUS-SYSTEMES.md).
+/Core/Package.swift                 @thomashoulachi
+/Core/Sources/Core/Contrats/        @thomashoulachi
+/Core/Sources/Core/Modeles/         @thomashoulachi
+/Core/Sources/CoreTestKit/          @thomashoulachi
+/Core/Tests/CoreTests/Fixtures/export/  @thomashoulachi
+/.github/                           @thomashoulachi
+/scripts/                           @thomashoulachi
+
+# Sous-systèmes : décommenter avec le nom GitHub du responsable.
+# /Core/Sources/Core/Reconnaissance/  @À-REMPLIR
+# /Core/Sources/Core/Dictee/          @À-REMPLIR
+# /Core/Sources/Core/Donnees/         @À-REMPLIR

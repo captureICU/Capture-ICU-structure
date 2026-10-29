@@ -1,0 +1,22 @@
+# Swift / SwiftPM
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode
+*.xcuserstate
+xcuserdata/
+DerivedData/
+*.xcresult/
+build/
+
+# macOS
+.DS_Store
+
+# Rien de patient, jamais, même par accident.
+*.jpg
+*.jpeg
+*.png
+*.heic
+*.mov
+*.mp4
