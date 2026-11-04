@@ -1,90 +1,33 @@
-# App — à créer
+# App/ — les écrans iPhone
 
-Le projet Xcode n'existe pas encore. La CI le sait et saute le job macOS; elle
-s'activera toute seule au premier commit contenant `App/CaptureICU.xcodeproj`.
+Les écrans du squelette sont dans `Ecrans/` :
 
-## Créer le projet (une fois, sur un Mac)
+| Fichier | Étape |
+|---|---|
+| `CaptureICUApp.swift` | point d'entrée; c'est ici qu'on choisit les modules branchés |
+| `EcranConnexion.swift` | 1 · connexion (factice : demo / demo) |
+| `EcranPatients.swift` | 2 · choix du patient |
+| `EcranSession.swift` | 3 à 6 · photos, note vocale, validation, PDF |
 
-1. Xcode → **File ▸ New ▸ Project ▸ iOS ▸ App**
-2. Product Name **`CaptureICU`**, SwiftUI, Swift, cocher **Include Tests**
-3. Enregistrer dans **`App/`** → on doit obtenir `App/CaptureICU.xcodeproj` (chemin exact attendu par la CI)
-4. **File ▸ Add Package Dependencies ▸ Add Local…** → choisir `Core/`, ajouter la bibliothèque `Core` à la cible de l'app, et **`CoreTestKit` à la cible de tests seulement**
-5. `xcodebuild test` passe en local → PR
+Pour l'instant, les boutons envoient des photos et un audio factices. Brancher
+la vraie caméra et le vrai micro viendra avec les modules OCR et Transcription.
 
-## Ce qui va ici
+> Ces écrans n'ont pas encore été compilés : le projet Xcode n'existe pas
+> encore. La première compilation sur le Mac mini dira ce qui est à corriger.
 
-Écrans, appel à Vision (OCR), appel à Speech, stockage, PDF. `App/` traduit le
-monde réel en types du noyau et affiche ce que le noyau renvoie.
+## Créer le projet Xcode (une seule fois, sur un Mac)
 
-**Aucune règle métier.** Une expression régulière ou une borne physiologique dans
-un `View` est au mauvais endroit : elle devient intestable en une minute et coûte
-dix minutes de runner macOS. Si votre code peut s'écrire sans mentionner d'écran
-ni d'appareil, il va dans `Core/`.
-
-## Brancher un adaptateur réel
-
-Les protocoles existent déjà dans `Core/Sources/Core/Contrats/`. Un adaptateur
-traduit un framework Apple vers ce protocole, et rien de plus. Esquisse pour
-l'OCR (non compilée, à valider sur le Mac) :
-
-```swift
-import Core
-import Vision
-
-struct VisionTextRecognizer: TextRecognizer {
-    func recognizeText(in image: CapturedImage) async throws -> [OCRTextBlock] {
-        guard !image.data.isEmpty else { throw TextRecognitionError.emptyImage }
-
-        let request = VNRecognizeTextRequest()
-        request.recognitionLevel = .accurate
-        request.recognitionLanguages = ["fr-CA", "en-US"]
-        do {
-            try VNImageRequestHandler(data: image.data).perform([request])
-        } catch {
-            throw TextRecognitionError.unreadableImage
-        }
-
-        return (request.results ?? []).compactMap { observation in
-            guard let best = observation.topCandidates(1).first else { return nil }
-            let box = observation.boundingBox // origine en bas à gauche chez Vision
-            return OCRTextBlock(
-                text: best.string,
-                confidence: Double(best.confidence),
-                boundingBox: NormalizedRect(x: box.minX, y: box.minY, width: box.width, height: box.height)
-            )
-        }
-    }
-}
-```
-
-Son test de contrat, dans la cible de tests de l'app. L'image est **générée
-dans le test** (texte « FC 90 » dessiné avec `UIGraphicsImageRenderer`), jamais
-une photo de patient :
-
-```swift
-import Core
-import CoreTestKit
-import Testing
-@testable import CaptureICU
-
-@Test("EX-102 : l'OCR Vision respecte le contrat")
-func visionHonoursContract() async {
-    let violations = await TextRecognizerContract.check(VisionTextRecognizer(), sample: imageSynthetique("FC 90"))
-    #expect(violations.isEmpty, "\(violations)")
-}
-```
-
-Même chose pour la parole : `SpeechTranscriber` + `SpeechTranscriberContract`,
-avec un fichier audio produit par synthèse vocale.
-
-L'app construit les pipelines avec les vrais adaptateurs :
-`MonitorCapturePipeline(recognizer: VisionTextRecognizer())`. Les aperçus SwiftUI
-et les tests de ViewModel leur passent les bouchons.
-
-## À prévoir dès le départ
-
-- **Les autres services externes derrière un protocole** (caméra, stockage),
-  injectés par `init`, avec une version bouchon pour les tests.
-- **Un bouton d'export des blocs OCR** dans un écran de débogage, qui écrit le
-  `blocks.json` du corpus de fixtures. Sans lui, les fixtures se transcrivent à
-  la main et perdent le bruit réel de l'OCR.
+1. Xcode → **File → New → Project… → iOS → App**.
+   Nom : `CaptureICU`. Interface : SwiftUI. Langage : Swift. Tests : cochés.
+   Enregistrer **dans ce dossier `App/`**, sans créer de dépôt git (le dépôt existe déjà).
+   Xcode crée `App/CaptureICU/`, avec `CaptureICU.xcodeproj` dedans.
+2. Supprimer les deux fichiers générés (`CaptureICUApp.swift`, `ContentView.swift`).
+   Glisser les quatre fichiers de `Ecrans/` dans le projet (sans « Copy items »).
+3. **File → Add Package Dependencies… → Add Local…** → choisir la **racine du
+   dépôt** (le dossier qui contient `Package.swift`). Cocher les bibliothèques
+   `Core`, `ModuleOCR`, `ModuleTranscription` et `ModuleExport` pour la cible
+   `CaptureICU`. Jamais `OutilsDeTest`.
+4. Lancer sur le simulateur (⌘R). Parcours : demo / demo → P-001 → trois photos
+   → dicter → valider → partager le PDF.
+5. Faire une PR avec `App/CaptureICU/`. Dès qu'il existe, la CI lance
+   aussi les tests de l'app sur un simulateur iOS.

@@ -1,8 +1,8 @@
 name: CI
 
-# noyau : Linux, ~1 min, à chaque poussée. Gratuit ou presque.
+# noyau : Linux, ~2 min, à chaque poussée. Core + 3 modules + bout en bout.
 # app   : macOS, ~10 min, sur pull request vers main seulement (facturé 10×).
-#         Sauté tant que App/CaptureICU.xcodeproj n'existe pas.
+#         Sauté tant que App/CaptureICU/CaptureICU.xcodeproj n'existe pas.
 
 on:
   push:
@@ -16,15 +16,15 @@ concurrency:
 
 jobs:
   noyau:
-    name: Noyau (Linux)
+    name: Tests (Linux)
     runs-on: ubuntu-latest
-    container: swift:latest
+    container: swift:6.0
     outputs:
       projet-xcode: ${{ steps.detection.outputs.existe }}
     steps:
       - uses: actions/checkout@v4
 
-      # Frontière du noyau + tous les tests : la même commande qu'en local.
+      # Frontière du Core + tous les tests : la même commande qu'en local.
       - name: Vérifications (scripts/verifier.sh)
         run: bash scripts/verifier.sh
 
@@ -35,7 +35,7 @@ jobs:
       - name: Le projet Xcode existe-t-il ?
         id: detection
         run: |
-          if [ -d App/CaptureICU.xcodeproj ]; then echo "existe=true" >> "$GITHUB_OUTPUT"
+          if [ -d App/CaptureICU/CaptureICU.xcodeproj ]; then echo "existe=true" >> "$GITHUB_OUTPUT"
           else echo "existe=false" >> "$GITHUB_OUTPUT"; fi
 
   app:
@@ -54,7 +54,7 @@ jobs:
           echo "udid=$udid" >> "$GITHUB_OUTPUT"
 
       - name: Tests
-        working-directory: App
+        working-directory: App/CaptureICU
         run: |
           xcodebuild test \
             -project CaptureICU.xcodeproj \
@@ -68,4 +68,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: TestResults.xcresult
-          path: App/TestResults.xcresult
+          path: App/CaptureICU/TestResults.xcresult
