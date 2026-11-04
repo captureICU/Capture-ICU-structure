@@ -34,4 +34,34 @@ struct Etape4NoteVocaleTests {
         #expect(session.dossier.noteVocale == Exemples.note)
     }
 
+    @Test("[4.2.2-2] l'information tapée devient la note")
+    func noteTapee() throws {
+        var session = Exemples.session()
+
+        try session.ecrireNote("  Patiente calme.  ")
+
+        #expect(session.dossier.noteVocale == "Patiente calme.")
+    }
+
+    @Test("[4.2.1-6] chaque enregistrement s'ajoute à la note, sur une nouvelle ligne")
+    func enregistrementsAjoutes() async throws {
+        var session = Exemples.session(Exemples.modulesFactices(transcription: FauxTranscription(texte: "Pansement sec.")))
+        try session.ecrireNote("Patiente calme.")
+
+        try await session.ajouterALaNote(Exemples.audio)
+        try await session.ajouterALaNote(Exemples.audio)
+
+        #expect(session.dossier.noteVocale == "Patiente calme.
+Pansement sec.
+Pansement sec.")
+    }
+
+    @Test("Un enregistrement sur une note vide devient la note")
+    func enregistrementSurNoteVide() async throws {
+        var session = Exemples.session()
+
+        try await session.ajouterALaNote(Exemples.audio)
+
+        #expect(session.dossier.noteVocale == Exemples.note)
+    }
 }

@@ -82,6 +82,27 @@ struct Etape3PhotosTests {
         #expect(session.dossier.lectures.map(\.etape.titre) == ["Moniteur", "Pompe 1"])
     }
 
+    @Test("[4.2.1-1] revenir en arrière efface la dernière photo")
+    func revenirEnArriere() async throws {
+        var session = Exemples.session()
+        try await session.capturerPhoto(Exemples.photo) // moniteur
+        try await session.capturerPhoto(Exemples.photo) // pompe 1
+
+        try session.revenirEnArriere()
+
+        #expect(session.etapeCourante == EtapeDeCapture(.pompe, numero: 1))
+        #expect(session.dossier.lectures.map(\.etape.titre) == ["Moniteur"])
+    }
+
+    @Test("Revenir en arrière au début ne fait rien")
+    func revenirAuDebut() throws {
+        var session = Exemples.session()
+
+        try session.revenirEnArriere()
+
+        #expect(session.etapeCourante == EtapeDeCapture(.moniteur))
+    }
+
     @Test("Une photo de trop est refusée")
     func photoDeTrop() async throws {
         var session = SessionDeCapture(

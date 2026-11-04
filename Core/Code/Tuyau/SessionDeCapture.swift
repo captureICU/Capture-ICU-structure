@@ -91,6 +91,16 @@ public struct SessionDeCapture: Sendable {
         }
     }
 
+    /// Revient à l'étape précédente et efface sa photo, s'il y en a une.
+    /// Sert à « Reprendre » ou « Supprimer » la dernière photo.
+    public mutating func revenirEnArriere() throws {
+        guard !dossier.estValide else { throw ErreurSession.dejaValide }
+        guard indexEtape > 0 else { return }
+        indexEtape -= 1
+        let etape = sequence[indexEtape]
+        dossier.lectures.removeAll { $0.etape == etape }
+    }
+
     /// Le patient a une pompe de plus. Elle est demandée tout de suite si on a
     /// déjà dépassé les pompes, sinon à la suite des autres.
     public mutating func ajouterPompe() {
@@ -109,6 +119,26 @@ public struct SessionDeCapture: Sendable {
     public mutating func enregistrerNote(_ audio: Audio) async throws {
         guard !dossier.estValide else { throw ErreurSession.dejaValide }
         dossier.noteVocale = try await modules.transcription.transcrire(audio)
+    }
+
+    /// Écrit la note à la main (champ « Informations » du formulaire).
+    /// Un texte vide efface la note.
+    public mutating func ecrireNote(_ texte: String) throws {
+        guard !dossier.estValide else { throw ErreurSession.dejaValide }
+        let nettoye = texte.trimmingCharacters(in: .whitespacesAndNewlines)
+        dossier.noteVocale = nettoye.isEmpty ? nil : nettoye
+    }
+
+    /// Transcrit un enregistrement de plus et l'ajoute à la fin de la note,
+    /// sur une nouvelle ligne. Le texte est gardé mot pour mot.
+    public mutating func ajouterALaNote(_ audio: Audio) async throws {
+        guard !dossier.estValide else { throw ErreurSession.dejaValide }
+        let texte = try await modules.transcription.transcrire(audio)
+        if let existante = dossier.noteVocale, !existante.isEmpty {
+            dossier.noteVocale = existante + "\n" + texte
+        } else {
+            dossier.noteVocale = texte
+        }
     }
 
     // MARK: - Étape 5 · Validation
