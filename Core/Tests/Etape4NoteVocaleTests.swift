@@ -51,9 +51,7 @@ struct Etape4NoteVocaleTests {
         try await session.ajouterALaNote(Exemples.audio)
         try await session.ajouterALaNote(Exemples.audio)
 
-        #expect(session.dossier.noteVocale == "Patiente calme.
-Pansement sec.
-Pansement sec.")
+        #expect(session.dossier.noteVocale == "Patiente calme.\nPansement sec.\nPansement sec.")
     }
 
     @Test("Un enregistrement sur une note vide devient la note")
