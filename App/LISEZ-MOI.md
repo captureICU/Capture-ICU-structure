@@ -29,21 +29,25 @@ note médicale n'est encore produite.
 Pour l'instant, la caméra et le micro sont factices (photos et audio inventés).
 Les brancher viendra avec les modules OCR et Transcription.
 
-> Ces écrans n'ont pas encore été compilés : le projet Xcode n'existe pas
-> encore. La première compilation sur le Mac mini dira ce qui est à corriger.
+## Lancer l'app (sur un Mac)
 
-## Créer le projet Xcode (une seule fois, sur un Mac)
+Le projet Xcode existe : `App/CaptureICU/CaptureICU.xcodeproj`. Il lit
+directement les fichiers de `Ecrans/` (un fichier ajouté dans ce dossier entre
+tout seul dans l'app) et branche le package local : `Core`, `ModuleOCR`,
+`ModuleTranscription`, `ModuleExport`. Jamais `OutilsDeTest`.
 
-1. Xcode → **File → New → Project… → iOS → App**.
-   Nom : `CaptureICU`. Interface : SwiftUI. Langage : Swift. Tests : cochés.
-   Enregistrer **dans ce dossier `App/`**, sans créer de dépôt git (le dépôt existe déjà).
-   Xcode crée `App/CaptureICU/`, avec `CaptureICU.xcodeproj` dedans.
-2. Supprimer les deux fichiers générés (`CaptureICUApp.swift`, `ContentView.swift`).
-   Glisser tous les fichiers de `Ecrans/` dans le projet (sans « Copy items »).
-3. **File → Add Package Dependencies… → Add Local…** → choisir la **racine du
-   dépôt** (le dossier qui contient `Package.swift`). Cocher les bibliothèques
-   `Core`, `ModuleOCR`, `ModuleTranscription` et `ModuleExport` pour la cible
-   `CaptureICU`. Jamais `OutilsDeTest`.
-4. Lancer sur le simulateur (⌘R) et suivre le parcours INF ci-dessus.
-5. Faire une PR avec `App/CaptureICU/`. Dès qu'il existe, la CI lance
-   aussi les tests de l'app sur un simulateur iOS.
+1. Ouvrir `App/CaptureICU/CaptureICU.xcodeproj` dans Xcode.
+2. Choisir un simulateur iPhone, puis ⌘R. Suivre le parcours INF ci-dessus.
+3. ⌘U lance le test d'interface `UITests/ParcoursINFUITests.swift` : il joue
+   tout le parcours INF (connexion → photos → formulaire → vérification → PDF)
+   et garde une capture d'écran à chaque étape.
+
+En ligne de commande :
+
+```bash
+cd App/CaptureICU
+xcodebuild test -project CaptureICU.xcodeproj -scheme CaptureICU \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro' CODE_SIGNING_ALLOWED=NO
+```
+
+La CI lance ce même test sur un simulateur iOS à chaque pull request vers `main`.
