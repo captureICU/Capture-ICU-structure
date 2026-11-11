@@ -1,81 +1,102 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="680" viewBox="0 0 960 680">
-  <rect width="960" height="680" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="750" viewBox="0 0 960 750">
+  <rect width="960" height="750" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000000"/>
+    </marker>
+  </defs>
   <g font-family="Helvetica, Arial, sans-serif" fill="#000000">
 
-    <text x="20" y="38" font-size="18" font-weight="600">Où vit quoi dans le dépôt</text>
+    <text x="20" y="34" font-size="18" font-weight="600">Où vit quoi dans le dépôt</text>
+    <text x="940" y="34" font-size="12" text-anchor="end"><tspan fill="#0b7a55" font-weight="600">en vert</tspan><tspan fill-opacity=".7"> = les tests</tspan></text>
 
-    <!-- En-têtes de colonnes -->
-    <text x="380" y="72" font-size="13" font-weight="600" text-anchor="middle">LE CODE</text>
-    <text x="760" y="72" font-size="13" font-weight="600" text-anchor="middle">SES TESTS</text>
+    <!-- Étiquettes de gauche -->
+    <g font-size="12" font-weight="600" fill-opacity=".55">
+      <text x="20" y="114">UI</text>
+      <text x="20" y="250">CORE</text>
+      <text x="20" y="396">TESTS DES</text>
+      <text x="20" y="411">MODULES</text>
+      <text x="20" y="514">MODULES</text>
+      <text x="20" y="636">OUTILS</text>
+    </g>
 
     <!-- UI -->
-    <text x="20" y="116" font-size="14" font-weight="600">UI</text>
-    <text x="20" y="133" font-size="11" fill-opacity=".6">les écrans iPhone</text>
-    <rect x="200" y="86" width="360" height="60" fill="none" stroke="#000000"/>
-    <text x="216" y="111" font-size="14" font-family="Menlo, Consolas, monospace">App/Ecrans/</text>
-    <text x="216" y="132" font-size="12" fill-opacity=".7">connexion, patient, photos, note, vérification</text>
-    <rect x="580" y="86" width="360" height="60" fill="none" stroke="#000000" stroke-dasharray="5 4"/>
-    <text x="596" y="111" font-size="12" fill-opacity=".7">pas encore de tests</text>
-    <text x="596" y="132" font-size="12" fill-opacity=".7">compilés dans Xcode sur le Mac mini</text>
+    <rect x="280" y="74" width="400" height="60" fill="none" stroke="#000000"/>
+    <text x="480" y="99" font-size="15" font-weight="600" text-anchor="middle">UI · <tspan font-family="Menlo, Consolas, monospace" font-weight="400">App/Ecrans/</tspan></text>
+    <text x="480" y="120" font-size="12" fill-opacity=".7" text-anchor="middle">les écrans iPhone (pas encore de tests : compilés dans Xcode)</text>
+    <line x1="480" y1="134" x2="480" y2="182" stroke="#000000" marker-end="url(#a)"/>
+
+    <!-- Cadre bout en bout -->
+    <rect x="130" y="160" width="700" height="425" fill="none" stroke="#0b7a55" stroke-width="2" stroke-dasharray="8 5"/>
+    <text x="818" y="574" font-size="12" text-anchor="end" fill="#0b7a55"><tspan font-weight="600">✓ BoutEnBout/</tspan> — test bout en bout : tout ce cadre, avec les vrais modules</text>
 
     <!-- CORE -->
-    <text x="20" y="196" font-size="14" font-weight="600">CORE</text>
-    <text x="20" y="213" font-size="11" fill-opacity=".6">le tuyau central</text>
-    <rect x="200" y="166" width="360" height="70" fill="none" stroke="#000000" stroke-width="2"/>
-    <text x="216" y="191" font-size="14" font-family="Menlo, Consolas, monospace">Core/Code/</text>
-    <text x="216" y="211" font-size="12" font-family="Menlo, Consolas, monospace" fill-opacity=".7">Tuyau/ · Prises/ · Modeles/</text>
-    <text x="216" y="227" font-size="11" fill-opacity=".6">parcours, dossier patient, validation, les 3 prises</text>
-    <rect x="580" y="166" width="360" height="70" fill="none" stroke="#000000" stroke-width="2"/>
-    <text x="596" y="191" font-size="14" font-family="Menlo, Consolas, monospace">Core/Tests/</text>
-    <text x="596" y="211" font-size="12" fill-opacity=".7">le Core seul, avec de faux modules</text>
+    <rect x="150" y="185" width="660" height="150" fill="none" stroke="#000000" stroke-width="2"/>
+    <text x="170" y="212" font-size="15" font-weight="600">CORE · <tspan font-family="Menlo, Consolas, monospace" font-weight="400">Core/Code/</tspan></text>
+    <text x="170" y="236" font-size="12" fill-opacity=".75"><tspan font-family="Menlo, Consolas, monospace">Tuyau/</tspan> — le parcours : connexion → photos → note → validation</text>
+    <text x="170" y="256" font-size="12" fill-opacity=".75"><tspan font-family="Menlo, Consolas, monospace">Modeles/</tspan> — le dossier patient</text>
 
-    <!-- MODULES -->
-    <text x="20" y="286" font-size="14" font-weight="600">MODULES</text>
-    <text x="20" y="303" font-size="11" fill-opacity=".6">un dossier par module,</text>
-    <text x="20" y="318" font-size="11" fill-opacity=".6">code et tests côte à côte</text>
+    <rect x="600" y="196" width="196" height="46" fill="#e6f4ee" stroke="#0b7a55"/>
+    <text x="612" y="216" font-size="13" font-weight="600" fill="#0b7a55">✓ <tspan font-family="Menlo, Consolas, monospace">Core/Tests/</tspan></text>
+    <text x="612" y="233" font-size="11" fill="#0b7a55">le Core seul, avec de faux modules</text>
 
-    <rect x="200" y="256" width="360" height="56" fill="none" stroke="#000000"/>
-    <text x="216" y="280" font-size="14" font-family="Menlo, Consolas, monospace">Modules/OCR/Code/</text>
-    <text x="216" y="300" font-size="12" fill-opacity=".7">photo → valeurs</text>
-    <rect x="580" y="256" width="360" height="56" fill="none" stroke="#000000"/>
-    <text x="596" y="280" font-size="14" font-family="Menlo, Consolas, monospace">Modules/OCR/Tests/</text>
-    <text x="596" y="300" font-size="12" fill-opacity=".7">le module OCR seul</text>
+    <!-- Prises -->
+    <text x="170" y="282" font-size="11" fill-opacity=".6"><tspan font-family="Menlo, Consolas, monospace">Prises/</tspan> — là où chaque module se branche</text>
+    <g font-size="13" text-anchor="middle">
+      <rect x="175" y="292" width="150" height="34" fill="#f2f2f2" stroke="#000000"/><text x="250" y="314">prise OCR</text>
+      <rect x="405" y="292" width="150" height="34" fill="#f2f2f2" stroke="#000000"/><text x="480" y="314">prise audio</text>
+      <rect x="635" y="292" width="150" height="34" fill="#f2f2f2" stroke="#000000"/><text x="710" y="314">prise export</text>
+    </g>
 
-    <rect x="200" y="322" width="360" height="56" fill="none" stroke="#000000"/>
-    <text x="216" y="346" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Transcription/Code/</text>
-    <text x="216" y="366" font-size="12" fill-opacity=".7">audio → texte de la note</text>
-    <rect x="580" y="322" width="360" height="56" fill="none" stroke="#000000"/>
-    <text x="596" y="346" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Transcription/Tests/</text>
-    <text x="596" y="366" font-size="12" fill-opacity=".7">le module Transcription seul</text>
+    <!-- Liens prise → test → module -->
+    <g stroke="#000000">
+      <line x1="250" y1="326" x2="250" y2="368"/><line x1="480" y1="326" x2="480" y2="368"/><line x1="710" y1="326" x2="710" y2="368"/>
+      <line x1="250" y1="438" x2="250" y2="478"/><line x1="480" y1="438" x2="480" y2="478"/><line x1="710" y1="438" x2="710" y2="478"/>
+    </g>
 
-    <rect x="200" y="388" width="360" height="56" fill="none" stroke="#000000"/>
-    <text x="216" y="412" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Export/Code/</text>
-    <text x="216" y="432" font-size="12" fill-opacity=".7">dossier validé → note infirmière PDF</text>
-    <rect x="580" y="388" width="360" height="56" fill="none" stroke="#000000"/>
-    <text x="596" y="412" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Export/Tests/</text>
-    <text x="596" y="432" font-size="12" fill-opacity=".7">le module Export seul</text>
+    <!-- Tests des modules (entre le Core et les modules) -->
+    <g text-anchor="middle">
+      <rect x="150" y="368" width="200" height="70" fill="#e6f4ee" stroke="#0b7a55" stroke-width="2"/>
+      <text x="250" y="391" font-size="13" font-weight="600" fill="#0b7a55">✓ <tspan font-family="Menlo, Consolas, monospace">Modules/OCR/Tests/</tspan></text>
+      <text x="250" y="410" font-size="11" fill="#0b7a55">le module respecte la prise</text>
+      <text x="250" y="426" font-size="11" fill="#0b7a55" font-family="Menlo, Consolas, monospace">VerifierPrise.ocr(...)</text>
 
-    <text x="200" y="462" font-size="11" fill-opacity=".6">Chaque module a aussi son LISEZ-MOI.md : Modules/&lt;module&gt;/LISEZ-MOI.md</text>
+      <rect x="365" y="368" width="230" height="70" fill="#e6f4ee" stroke="#0b7a55" stroke-width="2"/>
+      <text x="480" y="391" font-size="13" font-weight="600" fill="#0b7a55">✓ <tspan font-family="Menlo, Consolas, monospace">…/Transcription/Tests/</tspan></text>
+      <text x="480" y="410" font-size="11" fill="#0b7a55">le module respecte la prise</text>
+      <text x="480" y="426" font-size="11" fill="#0b7a55" font-family="Menlo, Consolas, monospace">VerifierPrise.transcription(...)</text>
 
-    <!-- OUTILS DE TEST -->
-    <text x="20" y="506" font-size="14" font-weight="600">OUTILS</text>
-    <text x="20" y="523" font-size="11" fill-opacity=".6">partagés par les tests</text>
-    <rect x="200" y="482" width="740" height="52" fill="none" stroke="#000000" stroke-dasharray="5 4"/>
-    <text x="216" y="505" font-size="14" font-family="Menlo, Consolas, monospace">OutilsDeTest/</text>
-    <text x="216" y="524" font-size="12" fill-opacity=".7">faux modules + VerifierPrise : pour tester un morceau sans avoir besoin des autres</text>
+      <rect x="610" y="368" width="200" height="70" fill="#e6f4ee" stroke="#0b7a55" stroke-width="2"/>
+      <text x="710" y="391" font-size="13" font-weight="600" fill="#0b7a55">✓ <tspan font-family="Menlo, Consolas, monospace">Modules/Export/Tests/</tspan></text>
+      <text x="710" y="410" font-size="11" fill="#0b7a55">le module respecte la prise</text>
+      <text x="710" y="426" font-size="11" fill="#0b7a55" font-family="Menlo, Consolas, monospace">VerifierPrise.export(...)</text>
+    </g>
 
-    <!-- BOUT EN BOUT -->
-    <text x="20" y="578" font-size="14" font-weight="600">BOUT EN BOUT</text>
-    <text x="20" y="595" font-size="11" fill-opacity=".6">tout assemblé</text>
-    <rect x="200" y="552" width="740" height="60" fill="none" stroke="#000000" stroke-width="2"/>
-    <text x="216" y="576" font-size="14" font-family="Menlo, Consolas, monospace">BoutEnBout/</text>
-    <text x="216" y="597" font-size="12" fill-opacity=".7">le parcours complet avec les vrais modules : connexion → patient → photos → note → validation → PDF</text>
+    <!-- Modules -->
+    <g text-anchor="middle">
+      <rect x="150" y="478" width="200" height="66" fill="none" stroke="#000000"/>
+      <text x="250" y="503" font-size="13" font-family="Menlo, Consolas, monospace">Modules/OCR/Code/</text>
+      <text x="250" y="525" font-size="12" fill-opacity=".7">photo → valeurs</text>
+
+      <rect x="365" y="478" width="230" height="66" fill="none" stroke="#000000"/>
+      <text x="480" y="503" font-size="13" font-family="Menlo, Consolas, monospace">Modules/Transcription/Code/</text>
+      <text x="480" y="525" font-size="12" fill-opacity=".7">audio → texte de la note</text>
+
+      <rect x="610" y="478" width="200" height="66" fill="none" stroke="#000000"/>
+      <text x="710" y="503" font-size="13" font-family="Menlo, Consolas, monospace">Modules/Export/Code/</text>
+      <text x="710" y="525" font-size="12" fill-opacity=".7">dossier validé → PDF</text>
+    </g>
+
+    <!-- Outils de test -->
+    <rect x="150" y="605" width="660" height="56" fill="none" stroke="#000000" stroke-dasharray="5 4"/>
+    <text x="170" y="628" font-size="13" font-family="Menlo, Consolas, monospace">OutilsDeTest/</text>
+    <text x="170" y="648" font-size="12" fill-opacity=".7">faux modules (pour Core/Tests) + VerifierPrise (pour les tests des modules)</text>
 
     <!-- Commandes -->
-    <line x1="20" y1="634" x2="940" y2="634" stroke="#000000" stroke-opacity=".25"/>
-    <text x="20" y="660" font-size="12" font-family="Menlo, Consolas, monospace">bash scripts/tester.sh ocr</text>
-    <text x="232" y="660" font-size="12" fill-opacity=".7">→ les tests d'un module</text>
-    <text x="500" y="660" font-size="12" font-family="Menlo, Consolas, monospace">bash scripts/verifier.sh</text>
-    <text x="700" y="660" font-size="12" fill-opacity=".7">→ tout, avant une pull request</text>
+    <line x1="20" y1="684" x2="940" y2="684" stroke="#000000" stroke-opacity=".25"/>
+    <text x="20" y="712" font-size="12" font-family="Menlo, Consolas, monospace">bash scripts/tester.sh ocr</text>
+    <text x="232" y="712" font-size="12" fill-opacity=".7">→ un seul module</text>
+    <text x="500" y="712" font-size="12" font-family="Menlo, Consolas, monospace">bash scripts/verifier.sh</text>
+    <text x="700" y="712" font-size="12" fill-opacity=".7">→ tout, avant une pull request</text>
   </g>
 </svg>
