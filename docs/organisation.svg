@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="680" viewBox="0 0 960 680">
+  <rect width="960" height="680" fill="#ffffff"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#000000">
+
+    <text x="20" y="38" font-size="18" font-weight="600">Où vit quoi dans le dépôt</text>
+
+    <!-- En-têtes de colonnes -->
+    <text x="380" y="72" font-size="13" font-weight="600" text-anchor="middle">LE CODE</text>
+    <text x="760" y="72" font-size="13" font-weight="600" text-anchor="middle">SES TESTS</text>
+
+    <!-- UI -->
+    <text x="20" y="116" font-size="14" font-weight="600">UI</text>
+    <text x="20" y="133" font-size="11" fill-opacity=".6">les écrans iPhone</text>
+    <rect x="200" y="86" width="360" height="60" fill="none" stroke="#000000"/>
+    <text x="216" y="111" font-size="14" font-family="Menlo, Consolas, monospace">App/Ecrans/</text>
+    <text x="216" y="132" font-size="12" fill-opacity=".7">connexion, patient, photos, note, vérification</text>
+    <rect x="580" y="86" width="360" height="60" fill="none" stroke="#000000" stroke-dasharray="5 4"/>
+    <text x="596" y="111" font-size="12" fill-opacity=".7">pas encore de tests</text>
+    <text x="596" y="132" font-size="12" fill-opacity=".7">compilés dans Xcode sur le Mac mini</text>
+
+    <!-- CORE -->
+    <text x="20" y="196" font-size="14" font-weight="600">CORE</text>
+    <text x="20" y="213" font-size="11" fill-opacity=".6">le tuyau central</text>
+    <rect x="200" y="166" width="360" height="70" fill="none" stroke="#000000" stroke-width="2"/>
+    <text x="216" y="191" font-size="14" font-family="Menlo, Consolas, monospace">Core/Code/</text>
+    <text x="216" y="211" font-size="12" font-family="Menlo, Consolas, monospace" fill-opacity=".7">Tuyau/ · Prises/ · Modeles/</text>
+    <text x="216" y="227" font-size="11" fill-opacity=".6">parcours, dossier patient, validation, les 3 prises</text>
+    <rect x="580" y="166" width="360" height="70" fill="none" stroke="#000000" stroke-width="2"/>
+    <text x="596" y="191" font-size="14" font-family="Menlo, Consolas, monospace">Core/Tests/</text>
+    <text x="596" y="211" font-size="12" fill-opacity=".7">le Core seul, avec de faux modules</text>
+
+    <!-- MODULES -->
+    <text x="20" y="286" font-size="14" font-weight="600">MODULES</text>
+    <text x="20" y="303" font-size="11" fill-opacity=".6">un dossier par module,</text>
+    <text x="20" y="318" font-size="11" fill-opacity=".6">code et tests côte à côte</text>
+
+    <rect x="200" y="256" width="360" height="56" fill="none" stroke="#000000"/>
+    <text x="216" y="280" font-size="14" font-family="Menlo, Consolas, monospace">Modules/OCR/Code/</text>
+    <text x="216" y="300" font-size="12" fill-opacity=".7">photo → valeurs</text>
+    <rect x="580" y="256" width="360" height="56" fill="none" stroke="#000000"/>
+    <text x="596" y="280" font-size="14" font-family="Menlo, Consolas, monospace">Modules/OCR/Tests/</text>
+    <text x="596" y="300" font-size="12" fill-opacity=".7">le module OCR seul</text>
+
+    <rect x="200" y="322" width="360" height="56" fill="none" stroke="#000000"/>
+    <text x="216" y="346" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Transcription/Code/</text>
+    <text x="216" y="366" font-size="12" fill-opacity=".7">audio → texte de la note</text>
+    <rect x="580" y="322" width="360" height="56" fill="none" stroke="#000000"/>
+    <text x="596" y="346" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Transcription/Tests/</text>
+    <text x="596" y="366" font-size="12" fill-opacity=".7">le module Transcription seul</text>
+
+    <rect x="200" y="388" width="360" height="56" fill="none" stroke="#000000"/>
+    <text x="216" y="412" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Export/Code/</text>
+    <text x="216" y="432" font-size="12" fill-opacity=".7">dossier validé → note infirmière PDF</text>
+    <rect x="580" y="388" width="360" height="56" fill="none" stroke="#000000"/>
+    <text x="596" y="412" font-size="14" font-family="Menlo, Consolas, monospace">Modules/Export/Tests/</text>
+    <text x="596" y="432" font-size="12" fill-opacity=".7">le module Export seul</text>
+
+    <text x="200" y="462" font-size="11" fill-opacity=".6">Chaque module a aussi son LISEZ-MOI.md : Modules/&lt;module&gt;/LISEZ-MOI.md</text>
+
+    <!-- OUTILS DE TEST -->
+    <text x="20" y="506" font-size="14" font-weight="600">OUTILS</text>
+    <text x="20" y="523" font-size="11" fill-opacity=".6">partagés par les tests</text>
+    <rect x="200" y="482" width="740" height="52" fill="none" stroke="#000000" stroke-dasharray="5 4"/>
+    <text x="216" y="505" font-size="14" font-family="Menlo, Consolas, monospace">OutilsDeTest/</text>
+    <text x="216" y="524" font-size="12" fill-opacity=".7">faux modules + VerifierPrise : pour tester un morceau sans avoir besoin des autres</text>
+
+    <!-- BOUT EN BOUT -->
+    <text x="20" y="578" font-size="14" font-weight="600">BOUT EN BOUT</text>
+    <text x="20" y="595" font-size="11" fill-opacity=".6">tout assemblé</text>
+    <rect x="200" y="552" width="740" height="60" fill="none" stroke="#000000" stroke-width="2"/>
+    <text x="216" y="576" font-size="14" font-family="Menlo, Consolas, monospace">BoutEnBout/</text>
+    <text x="216" y="597" font-size="12" fill-opacity=".7">le parcours complet avec les vrais modules : connexion → patient → photos → note → validation → PDF</text>
+
+    <!-- Commandes -->
+    <line x1="20" y1="634" x2="940" y2="634" stroke="#000000" stroke-opacity=".25"/>
+    <text x="20" y="660" font-size="12" font-family="Menlo, Consolas, monospace">bash scripts/tester.sh ocr</text>
+    <text x="232" y="660" font-size="12" fill-opacity=".7">→ les tests d'un module</text>
+    <text x="500" y="660" font-size="12" font-family="Menlo, Consolas, monospace">bash scripts/verifier.sh</text>
+    <text x="700" y="660" font-size="12" fill-opacity=".7">→ tout, avant une pull request</text>
+  </g>
+</svg>

@@ -16,6 +16,10 @@ Projet intégrateur GBM8970, Polytechnique Montréal.
 3. **[docs/GUIDE-EQUIPE.md](docs/GUIDE-EQUIPE.md)** : ouvrir le projet, lancer les tests,
    écrire un test, proposer son code.
 
+## Où vit quoi
+
+![Où sont le Core, l'UI, les modules, leurs tests et le test bout en bout](docs/organisation.svg)
+
 ## Qui travaille où
 
 | Dossier | Ce qu'il fait | Responsable |
